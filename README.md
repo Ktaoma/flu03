@@ -19,8 +19,8 @@ makeblastdb -in db/sequences_DNA.fasta -dbtype nucl
 
 #3. running assembly from main script
 #influenza A
-./01_run.sh both 300 AGTAGAAACAAGG AGCAAAAGCAGG
+./01_run.sh AGTAGAAACAAGG AGCAAAAGCAGG
 #influenza B
-./01_run.sh both 300 AGCAGAAGCAGAGC AGTAGTAACAAGAGC
+./01_run.sh AGCAGAAGCAGAGC AGTAGTAACAAGAGC
 ```
 

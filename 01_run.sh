@@ -9,10 +9,10 @@ makeblastdb -in db/sequences_DNA.fasta -dbtype nucl
 
 
 fl=$(ls sample/barcode*)
-type=$1
-leng=$2
-fp=$3
-rp=$4
+type=both
+leng=350
+fp=$1
+rp=$2
 
 for i in $fl;
 do
@@ -45,12 +45,12 @@ do
 
     echo 'Sort reads into bucket'
     zcat $path/sample_final.fa.gz | blastn -query - -db db/sequences_DNA.fasta -outfmt '6 qseqid sseqid pident length qlen' > $path/blast_hits.tsv
-    cat ${path}/blast_hits.tsv | awk '{prop=100*($4/$5);print $0 "\t" prop}'| awk '$3 >= 80 && $6 >= 80' > ${path}/blast_hits_filtered.tsv
+    cat ${path}/blast_hits.tsv | awk '{prop=100*($4/$5);print $0 "\t" prop}'| awk '$3 >= 90 && $6 >= 90' > ${path}/blast_hits_filtered.tsv
 
     echo 'Get summary statistics of QC fasq'
     seqkit stat $path/sample_final.fa.gz -Ta | sed -e 's/,//g' | awk 'NR!=1 {print $0}' >> ${path}/read_count.tsv
 
-    for k in 4;
+    for k in 1 2 3 4 5 6 7 8;
     do
     
         echo 'Get read of ${k} segment'
